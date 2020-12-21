@@ -1,4 +1,4 @@
-package io.github.rura6502.followbeautifulbrothers;
+package io.github.rura6502.follow_beautiful_brothers;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
