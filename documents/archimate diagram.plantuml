@@ -1,0 +1,22 @@
+@startuml archimate diagram
+
+sprite $businessService jar:archimate/business-service
+
+rectangle "Order" as orderService <<$businessService>>
+rectangle "Payment" as paymentService <<$businessService>>
+rectangle "Point" as pointService <<$businessService>>
+rectangle "Store" as storeService <<$businessService>>
+rectangle "User" as userService <<$businessService>>
+
+orderService -right--> paymentService : 결제 요청
+orderService -up--> storeService : 주문 요청
+orderService -down--> pointService : 포인트 가감
+orderService -down--> userService : 배송지 조회
+
+paymentService -left--> orderService : 결제 처리
+
+pointService --> orderService : 포인트 조회
+
+storeService --> orderService : 주문 처리
+
+@enduml

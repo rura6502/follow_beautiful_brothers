@@ -1,0 +1,97 @@
+@startuml entity diagram
+skinparam linetype ortho
+
+
+entity tbl_store {
+  * store_id: number <<auto>>
+  --
+  * name: text
+  * tel: text
+  * open_time: datetime
+  * close_time: datetime
+  * point_rate: number
+  description: text
+}
+
+entity tbl_menu_item {
+  * menu_id: number <<auto>>
+  --
+  * fk_store_id: <<fk>>
+  * name: text
+  * price: number
+  pic: text
+  description: text
+}
+
+entity tbl_order {
+  * order_id: number <<auto>>
+  --
+  * address: text
+  * created: datetime
+  * message: text
+  * need_disposable_product: boolean
+  * status: enum
+  * used_point: number
+  * applied_point_rate: number
+}
+
+entity tbl_order_item {
+  --
+  * fk_order_id: <<fk>>
+  history_fk_menu_item_menu_id
+  history_fk_menu_name
+  history_fk_menu_price
+}
+
+entity tbl_user {
+  * user_id: number <<auto>>
+  --
+  * name: text
+  * tel: text
+  address: text
+  email: text
+}
+
+entity tbl_point {
+  * point_id: number <<auto>>
+  --
+  * fk_user_id: <<fk>>
+}
+
+entity tbl_point_history {
+  --
+  * fk_point_id: <<fk>>
+  * fk_order_id: <<fk>>
+  * point: number
+}
+
+
+tbl_user ||..o{ tbl_order
+tbl_user ||..|| tbl_point
+
+tbl_order ||..|| tbl_store
+tbl_order |o..|| tbl_order_item
+
+
+tbl_store }o..|| tbl_menu_item
+
+tbl_point |o..o{ tbl_point_history
+
+
+' tbl_point |o--o{ tbl_point_history
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@enduml
